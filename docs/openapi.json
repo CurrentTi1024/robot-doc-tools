@@ -1,0 +1,898 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Robotic Workshop Preliminary AI Service",
+    "version": "1.0"
+  },
+  "paths": {
+    "/v1/checklist-jobs": {
+      "post": {
+        "summary": "Request Checklist",
+        "operationId": "request_checklist_v1_checklist_jobs_post",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_request_checklist_v1_checklist_jobs_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobCreated"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/scoring-jobs": {
+      "post": {
+        "summary": "Request Scoring",
+        "operationId": "request_scoring_v1_scoring_jobs_post",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScoringJobs"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchCreated"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/{job_id}": {
+      "get": {
+        "summary": "Job Status",
+        "operationId": "job_status_v1_jobs__job_id__get",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobStatus"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/submissions/{submission_id}/checklist": {
+      "get": {
+        "summary": "Get Checklist",
+        "operationId": "get_checklist_v1_submissions__submission_id__checklist_get",
+        "parameters": [
+          {
+            "name": "submission_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Submission Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChecklistResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/submissions/{submission_id}/evaluation": {
+      "get": {
+        "summary": "Get Evaluation",
+        "operationId": "get_evaluation_v1_submissions__submission_id__evaluation_get",
+        "parameters": [
+          {
+            "name": "submission_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Submission Id"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health/live": {
+      "get": {
+        "summary": "Live",
+        "operationId": "live_health_live_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health/ready": {
+      "get": {
+        "summary": "Ready",
+        "operationId": "ready_health_ready_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BatchCreated": {
+        "properties": {
+          "job_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Job Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "job_ids"
+        ],
+        "title": "BatchCreated"
+      },
+      "Body_request_checklist_v1_checklist_jobs_post": {
+        "properties": {
+          "submission_id": {
+            "type": "string",
+            "title": "Submission Id"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B",
+              "C"
+            ],
+            "title": "Category"
+          },
+          "request_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Request Id"
+          },
+          "pdf": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "Pdf"
+          }
+        },
+        "type": "object",
+        "required": [
+          "submission_id",
+          "revision",
+          "category",
+          "request_id",
+          "pdf"
+        ],
+        "title": "Body_request_checklist_v1_checklist_jobs_post"
+      },
+      "ChecklistItem": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "template_page": {
+            "type": "integer",
+            "title": "Template Page"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "present",
+              "missing",
+              "uncertain"
+            ],
+            "title": "Status"
+          },
+          "evidence_pages": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Evidence Pages"
+          },
+          "hint": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hint"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_id",
+          "title",
+          "template_page",
+          "status",
+          "evidence_pages",
+          "hint"
+        ],
+        "title": "ChecklistItem"
+      },
+      "ChecklistResult": {
+        "properties": {
+          "submission_id": {
+            "type": "string",
+            "title": "Submission Id"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "rules_version": {
+            "type": "string",
+            "title": "Rules Version"
+          },
+          "rules_sha256": {
+            "type": "string",
+            "title": "Rules Sha256"
+          },
+          "parser": {
+            "type": "string",
+            "title": "Parser"
+          },
+          "status": {
+            "type": "string",
+            "const": "completed",
+            "title": "Status"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ChecklistItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "summary": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "propertyNames": {
+              "enum": [
+                "present",
+                "missing",
+                "uncertain"
+              ]
+            },
+            "type": "object",
+            "title": "Summary"
+          }
+        },
+        "type": "object",
+        "required": [
+          "submission_id",
+          "revision",
+          "rules_version",
+          "rules_sha256",
+          "parser",
+          "status",
+          "items",
+          "summary"
+        ],
+        "title": "ChecklistResult"
+      },
+      "EvaluationResult": {
+        "properties": {
+          "submission_id": {
+            "type": "string",
+            "title": "Submission Id"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "rules_version": {
+            "type": "string",
+            "title": "Rules Version"
+          },
+          "rules_sha256": {
+            "type": "string",
+            "title": "Rules Sha256"
+          },
+          "parser": {
+            "type": "string",
+            "title": "Parser"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B",
+              "C"
+            ],
+            "title": "Category"
+          },
+          "rubric_version": {
+            "type": "string",
+            "title": "Rubric Version"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "completed_with_review_flags"
+            ],
+            "title": "Status"
+          },
+          "criteria": {
+            "items": {
+              "$ref": "#/components/schemas/ScoreItem"
+            },
+            "type": "array",
+            "title": "Criteria"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/Summary"
+          }
+        },
+        "type": "object",
+        "required": [
+          "submission_id",
+          "revision",
+          "rules_version",
+          "rules_sha256",
+          "parser",
+          "category",
+          "rubric_version",
+          "status",
+          "criteria",
+          "summary"
+        ],
+        "title": "EvaluationResult"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "JobCreated": {
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "title": "Job Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "job_id"
+        ],
+        "title": "JobCreated"
+      },
+      "JobStatus": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "submission_id": {
+            "type": "string",
+            "title": "Submission Id"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "checklist",
+              "scoring"
+            ],
+            "title": "Operation"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "running",
+              "completed",
+              "failed",
+              "superseded"
+            ],
+            "title": "State"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "submission_id",
+          "revision",
+          "operation",
+          "state",
+          "error"
+        ],
+        "title": "JobStatus"
+      },
+      "ScoreItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "A1",
+              "A2",
+              "A3",
+              "B1",
+              "B2",
+              "B3"
+            ],
+            "title": "Id"
+          },
+          "score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score"
+          },
+          "level": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Level"
+          },
+          "reasons": {
+            "items": {
+              "$ref": "#/components/schemas/ScoringReason"
+            },
+            "type": "array",
+            "title": "Reasons"
+          },
+          "evidence_pages": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Evidence Pages"
+          },
+          "questions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Questions"
+          },
+          "needs_review": {
+            "type": "boolean",
+            "title": "Needs Review"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "score",
+          "level",
+          "reasons",
+          "evidence_pages",
+          "questions",
+          "needs_review"
+        ],
+        "title": "ScoreItem"
+      },
+      "ScoringJobs": {
+        "properties": {
+          "submissions": {
+            "items": {
+              "$ref": "#/components/schemas/SubmissionVersion"
+            },
+            "type": "array",
+            "maxItems": 200,
+            "minItems": 1,
+            "title": "Submissions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "submissions"
+        ],
+        "title": "ScoringJobs"
+      },
+      "ScoringReason": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Evidence Ids"
+          },
+          "evidence_pages": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Evidence Pages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "text",
+          "evidence_ids",
+          "evidence_pages"
+        ],
+        "title": "ScoringReason"
+      },
+      "SubmissionVersion": {
+        "properties": {
+          "submission_id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,100}$",
+            "title": "Submission Id"
+          },
+          "revision": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 1.0,
+            "title": "Revision"
+          }
+        },
+        "type": "object",
+        "required": [
+          "submission_id",
+          "revision"
+        ],
+        "title": "SubmissionVersion"
+      },
+      "Summary": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "strengths": {
+            "items": {
+              "$ref": "#/components/schemas/SummaryPoint"
+            },
+            "type": "array",
+            "title": "Strengths"
+          },
+          "gaps": {
+            "items": {
+              "$ref": "#/components/schemas/SummaryPoint"
+            },
+            "type": "array",
+            "title": "Gaps"
+          },
+          "review_points": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Review Points"
+          }
+        },
+        "type": "object",
+        "required": [
+          "text",
+          "strengths",
+          "gaps",
+          "review_points"
+        ],
+        "title": "Summary"
+      },
+      "SummaryPoint": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Evidence Ids"
+          },
+          "evidence_pages": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Evidence Pages"
+          },
+          "criterion_id": {
+            "type": "string",
+            "title": "Criterion Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "text",
+          "evidence_ids",
+          "evidence_pages",
+          "criterion_id"
+        ],
+        "title": "SummaryPoint"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
