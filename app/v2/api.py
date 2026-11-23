@@ -9,8 +9,8 @@ from starlette.datastructures import Headers
 from starlette.responses import JSONResponse
 
 from app.config import MAX_BYTES
-from app.repository import Conflict
 from .presentation import InvalidPresentation
+from .repository import Conflict
 from .service import Service, TooLarge
 
 

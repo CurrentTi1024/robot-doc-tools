@@ -6,7 +6,7 @@ V2 应用入口为 `app.v2.api:app`。上传 PPTX 与启动评分均为后台作
 
 | 路径 | 启动作业 | 查询作业 |
 |---|---|---|
-| `POST /v2/checklist-jobs` | Multipart 表单 `submission_id`、`category`（A/B/C）、`pptx`。返回 `202` 与 `job_id)。 | `POST /v2/checklist-jobs?job_id=<id>`，空请求体。 |
+| `POST /v2/checklist-jobs` | Multipart 表单 `submission_id`、`category`（A/B/C）、`pptx`。返回 `202` 与 `job_id`。 | `POST /v2/checklist-jobs?job_id=<id>`，空请求体。 |
 | `POST /v2/scoring-jobs` | JSON `{"upload_job_ids":["<上传任务 ID>"]}`，最多 200 个。返回 `202` 与同序 `job_ids`。 | JSON `{"job_id":"<评分任务 ID>"}`。 |
 
 Checklist 使用 `Authorization: Bearer <RW_TOKEN_SUBMIT>`，评分使用 `Authorization: Bearer <RW_TOKEN_JUDGE>`。两个值必须不同。查询返回 `200`、当前 `status` 和已有 `result`。评分允许上传证据已就绪的提案开始，Checklist 未完成时也可以调度。证据还未就绪返回 `409`。格式损坏返回 `422`。附加页不作为 Checklist 条目或页数错误。
@@ -34,6 +34,15 @@ py -3.12 -m venv .venv
 .\scripts\windows.ps1 v2-checklist
 .\scripts\windows.ps1 v2-scoring
 ```
+
+## 本地回归测试
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-test.txt
+.\scripts\windows.ps1 test
+```
+
+回归测试用临时 SQLite 和模拟评审验证接口及作业流程。
 
 ## 内网部署
 

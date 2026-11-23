@@ -1,17 +1,18 @@
 import hashlib
 import json
 
-from .config import CRITERIA, RULES
-from .document import normalized
+from .config import CRITERIA
 
 
-def load_rules(path=RULES):
+def normalized(text):
+    return " ".join(text.casefold().split())
+
+
+def load_rules(path):
     data = path.read_bytes()
     rules = json.loads(data)
     if not isinstance(rules["version"], str) or not rules["version"].strip():
         raise ValueError("Provide a nonempty rules version")
-    if rules["cross_page"] not in {"allow", "require_expected_page", "review"}:
-        raise ValueError("Invalid cross-page policy")
     pages = [item["page"] for item in rules["pages"]]
     if sorted(pages) != list(range(1, 8)):
         raise ValueError("Provide seven template pages numbered 1 through 7")

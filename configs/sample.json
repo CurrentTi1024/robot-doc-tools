@@ -1,6 +1,5 @@
 {
-  "version": "demo-v1",
-  "cross_page": "allow",
+  "version": "demo-v2",
   "pages": [
     {
       "page": 1,

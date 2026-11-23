@@ -14,6 +14,7 @@ from pptx.enum.shapes import MSO_SHAPE_TYPE
 from pptx.oxml.ns import qn
 
 from app.config import MAX_BYTES
+from app.rules import normalized
 
 
 PDF_RENDER_LOCK = Lock()
@@ -43,10 +44,6 @@ def open_pptx(body):
         raise
     except (BadZipFile, ValueError, KeyError, OSError, TypeError, SyntaxError, RuntimeError, NotImplementedError) as exc:
         raise InvalidPresentation("Unreadable PowerPoint package") from exc
-
-
-def normalized(text):
-    return " ".join(text.casefold().split())
 
 
 def mapped_pages(presentation, pages):

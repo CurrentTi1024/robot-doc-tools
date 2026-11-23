@@ -25,7 +25,7 @@ flowchart TD
     M --> H["评委查看六项初评、证据和复核重点"]
 ```
 
-**对接契约。** 建议 `POST /v2/checklist-jobs` 接收 `submission_id`、`category`、`pptx`，返回 `202 + job_id`。截稿后 `POST /v2/scoring-jobs` 接收一批最终参评的上传任务 ID，每份返回一个评分任务 ID。官网通过 `GET /v2/jobs/{job_id}` 查询对应状态和结果。任务 ID 把评审锁定到具体文件，官网无需提供提交版本号。评分就绪条件是该文件的证据可用，Checklist 缺项由评委依据正式规则处理。
+**对接契约。** 建议 `POST /v2/checklist-jobs` 接收 `submission_id`、`category`、`pptx`，返回 `202 + job_id`。截稿后 `POST /v2/scoring-jobs` 接收一批最终参评的上传任务 ID，每份返回一个评分任务 ID。官网通过原 POST 路径查询。Checklist 通过查询参数传入 `job_id`，评分通过 JSON 请求体传入 `job_id`。任务 ID 把评审锁定到具体文件，官网无需提供提交版本号。评分就绪条件是该文件的证据可用，Checklist 缺项由评委依据正式规则处理。
 
 ## 2. 一次解析，两条流程共用证据
 
@@ -40,12 +40,12 @@ flowchart TD
 
 ## 3. 一个框架、两个 Skill
 
-服务按任务类型指定 Skill。每个 Skill 用 `SKILL.md` 说明判定方法，`references/` 保存结构化的正式条目、判据和例子。业务人员改必填项、判档条件或分数区间时修改相应 Skill。单次任务固定所用规则的版本或摘要。两个 Agent 都通过受限工具查本提案的文字、表格、流程图和裁图，服务端校验条目 ID、证据归属及返回结构。公司平台接入时需验证相同 Skill 目录及工具契约。[Deep Agents Skills 文档](https://docs.langchain.com/oss/python/deepagents/skills)
+服务按任务类型指定 Skill。每个 Skill 用 `SKILL.md` 说明判定方法。业务人员在规则 JSON 中维护必填项、判档条件和分数区间。单次任务固定所用规则的版本或摘要。两个 Agent 都通过受限工具查本提案的文字、表格、流程图和裁图，服务端校验条目 ID、证据归属及返回结构。公司平台接入时需验证相同 Skill 目录及工具契约。[Deep Agents Skills 文档](https://docs.langchain.com/oss/python/deepagents/skills)
 
 **参赛者 · `workshop-checklist`**
 
 1. 七页模板仅定义每项的首选页。页数差异照常处理，多出的附加页跳过。用模板标题或标识识别正文，保留实际页码。首选页缺失时直接补查其他正文页。
-2. 大部分条目由模型做语义判断。首轮按首选页和共同证据组织输入，默认每批最多两项，复杂项单独判断。跨页时只补未满足的条件，指向同一张图的条目可以合并查证。按需送证据，避免让模型一次处理整份提案。
+2. 大部分条目由模型做语义判断。每次按首选页和条目规则组织一个 Agent 调用。跨页时补查未满足的条件。按需送证据，避免让模型一次处理整份提案。
 3. 任一正文页证据充分即返回 `present`（前端显示 OK）。一个条目的条件也可以分布在不同页，合并前核对对象、单位和统计口径。可判定范围已查完且确实缺项时返回 `missing` 和补充提示。关键图读不清或证据冲突时返回 `uncertain` 和原因。每个正式条目恰好返回一次，给出的证据引用能定位回实际页及对象。
 
 **评委 · `workshop-scoring`**
@@ -61,9 +61,9 @@ flowchart TD
 
 | 存放位置 | 记录内容 |
 |---|---|
-| PostgreSQL `jobs` | 本次上传或评分任务、对应原件、Skill 版本、期望评委名单、对外结果与摘要状态。 |
-| PostgreSQL `judge_runs` | 一位评委的一轮独立运行，记录模型、状态、租约和重试。 |
-| PostgreSQL `judge_scores` | 一位评委的一项结果，保存分数、等级、理由、证据 ID 和复核标记。`(judge_run_id, criterion_id)` 唯一。 |
+| PostgreSQL `rw_v2_jobs` | 本次上传或评分任务、对应原件、Skill 版本、期望评委名单、对外结果与摘要状态。 |
+| PostgreSQL `rw_v2_jobs`（judge 作业） | 一位评委的一轮独立运行，记录模型、状态、租约和重试。 |
+| PostgreSQL `rw_v2_judge_scores` | 一位评委的一项结果，保存分数、等级、理由、证据 ID 和复核标记。`(judge_run_id, criterion_id)` 唯一。 |
 | 内网文件或对象存储 | 原始 PPTX、页图和局部裁图，按本次上传和证据 ID 关联。 |
 
 每项通过校验就写 PG。Worker 中断后续跑未完成项；暂时性调用失败重试同一轮次，提交结果时核对租约，避免过期任务覆盖有效结果。两位评委各跑一次，每份有 12 条单评记录。另一个评委超时或模型汇总失败，已经完成的分数仍可查询。

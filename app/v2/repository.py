@@ -1,16 +1,53 @@
 import json
+import sqlite3
 import time
+from contextlib import contextmanager
+from pathlib import Path
 from uuid import uuid4
 
-from app.config import CRITERIA
-from app.repository import Conflict, Repository as BaseRepository
+from app.config import CRITERIA, DATABASE
 
 
 LEASE_SECONDS = 120
 MAX_ATTEMPTS = 3
 
 
-class Repository(BaseRepository):
+class Conflict(Exception):
+    pass
+
+
+class Repository:
+    def __init__(self, database=DATABASE):
+        self.database = database
+        self.postgres = database.startswith(("postgresql://", "postgres://"))
+
+    @contextmanager
+    def transaction(self, write=False):
+        if self.postgres:
+            import psycopg
+            from psycopg.rows import dict_row
+            conn = psycopg.connect(self.database, row_factory=dict_row, connect_timeout=5)
+        else:
+            Path(self.database).parent.mkdir(parents=True, exist_ok=True)
+            conn = sqlite3.connect(self.database, timeout=15)
+            conn.row_factory = sqlite3.Row
+
+        try:
+            if write and not self.postgres:
+                conn.execute("BEGIN IMMEDIATE")
+
+            def query(sql, *args):
+                statement = sql.replace("?", "%s") if self.postgres else sql
+                return conn.execute(statement, args)
+
+            yield query
+            conn.commit()
+        except BaseException:
+            conn.rollback()
+            raise
+        finally:
+            conn.close()
+
     def initialize(self):
         with self.transaction(write=True) as q:
             if self.postgres:
