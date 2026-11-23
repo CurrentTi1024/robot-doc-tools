@@ -67,7 +67,7 @@ Test-Path -LiteralPath $env:RW_V2_SOFFICE
 |---|---|
 | `RW_TOKEN_SUBMIT` / `RW_TOKEN_JUDGE` | 必填且两值不同，对应提交端与评委端。由官网后端持有。 |
 | `RW_V2_MODELS` | `configs/models-v2.json`。`models` 定义 profile 与环境变量名，`checklist`、`judges`、`summary` 选择角色，`vision` 指向读图 profile。评委支持配置 1–3 个不同的 profile。只有一位评委时，可复制模型 JSON 到 `.local` 并改为 `"judges": ["qwen"]`，再指定该副本。正式双评委使用两个不同的模型 ID。 |
-| `RW_V2_RULES` | `configs/sample.json`。该文件版本标签为 `demo-v1`，内容是 V2 可以消费的联调示例。正式环境指向实际规则 JSON。 |
+| `RW_V2_RULES` | `configs/sample.json`。默认规则版本为 `demo-v2`，作为联调示例。正式环境指向实际规则 JSON。 |
 | `RW_V2_TEMPLATE` | 可选的正式空白 PPTX 路径。配置后，提取时比较同一逻辑页的模板对象文字，过滤原样保留的说明文字。 |
 | `RW_V2_SOFFICE` / `RW_V2_SCORING_CONCURRENCY` | 渲染程序默认 `soffice`。评分 Worker 的默认并发是 2，可按模型配额调整。 |
 | `RW_DATA` / `RW_DATABASE` | 默认使用项目根目录 `.local` 和其中的 `service.db`。可为 `RW_DATABASE` 提供 SQLite 文件路径或 PostgreSQL DSN。 |
@@ -90,7 +90,7 @@ $env:RW_V2_TEMPLATE = 'D:\review-config\blank-template.pptx'
 
 | 区段 | 填写要求 |
 |---|---|
-| `version`、`cross_page` | 使用本次发布的规则版本。V2 的通过口径允许跨正文页，配置填写 `allow`。 |
+| `version` | 使用本次发布的规则版本。V2 的通过口径允许跨已映射的正文页。 |
 | `pages` | 定义模板逻辑页 1–7，以及每页独特的 `anchors`。用于识别章节和定位首选页。 |
 | `checklist` | 每项填写唯一 `id`、所属逻辑 `page`、`title`、`requirement` 和 `kind`，可补 `hint`。所有逻辑页需要有条目。沿用 `literal` 的条目要提供 `terms`，V2 仍通过 Agent 评估输入的条目规则。 |
 | `rubrics` | A/B/C 分组，每组恰含 A1、A2、A3、B1、B2、B3。每项提供 `name`、`conditions`、`levels`。档位有 `id`、`min`、`max`、`description`，分数范围在 0–100 之间且各档不重叠。可按正式规则指定最低档内的 `missing_score`。 |
@@ -238,4 +238,4 @@ celery -A app.v2.worker worker -Q v2-scoring --concurrency=1
 celery -A app.v2.worker beat
 ```
 
-仓库里的 [Kubernetes 清单](../deploy/k8s/workloads.yaml) 使用旧版入口。部署 V2 时以本节的镜像和四个角色命令为准，API 监听可用 TCP 探针检查。文档 Worker 运行在资源受限的非 root 容器，处理文件需要访问数据库和对象存储。内网模型调用由 Checklist 和评分 Worker 发出。
+在 Kubernetes 中用上述镜像为四个角色分别指定启动命令。API 监听可用 TCP 探针检查。文档 Worker 运行在资源受限的非 root 容器，处理文件需要访问数据库和对象存储。内网模型调用由 Checklist 和评分 Worker 发出。
