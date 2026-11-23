@@ -1,0 +1,8 @@
+/.venv/
+/.local/
+/.env
+/.paddlex/
+/deepseek.txt
+/deeepseek.txt
+__pycache__/
+*.pyc

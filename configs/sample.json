@@ -1,0 +1,648 @@
+{
+  "version": "demo-v1",
+  "cross_page": "allow",
+  "pages": [
+    {
+      "page": 1,
+      "anchors": [
+        "Workshop Section 1"
+      ]
+    },
+    {
+      "page": 2,
+      "anchors": [
+        "Workshop Section 2"
+      ]
+    },
+    {
+      "page": 3,
+      "anchors": [
+        "Workshop Section 3"
+      ]
+    },
+    {
+      "page": 4,
+      "anchors": [
+        "Workshop Section 4"
+      ]
+    },
+    {
+      "page": 5,
+      "anchors": [
+        "Workshop Section 5"
+      ]
+    },
+    {
+      "page": 6,
+      "anchors": [
+        "Workshop Section 6"
+      ]
+    },
+    {
+      "page": 7,
+      "anchors": [
+        "Workshop Section 7"
+      ]
+    }
+  ],
+  "checklist": [
+    {
+      "id": "P1-DETAIL",
+      "page": 1,
+      "title": "第 1 页作业说明",
+      "requirement": "说明至少一个具体操作及其目标",
+      "kind": "semantic"
+    },
+    {
+      "id": "P1-LABEL",
+      "page": 1,
+      "title": "第 1 页编号",
+      "requirement": "填写标识 Ref-P1",
+      "kind": "literal",
+      "terms": [
+        "Ref-P1"
+      ]
+    },
+    {
+      "id": "P2-DETAIL",
+      "page": 2,
+      "title": "第 2 页作业说明",
+      "requirement": "说明至少一个具体操作及其目标",
+      "kind": "semantic"
+    },
+    {
+      "id": "P2-LABEL",
+      "page": 2,
+      "title": "第 2 页编号",
+      "requirement": "填写标识 Ref-P2",
+      "kind": "literal",
+      "terms": [
+        "Ref-P2"
+      ]
+    },
+    {
+      "id": "P3-DETAIL",
+      "page": 3,
+      "title": "第 3 页作业说明",
+      "requirement": "说明至少一个具体操作及其目标",
+      "kind": "semantic"
+    },
+    {
+      "id": "P3-LABEL",
+      "page": 3,
+      "title": "第 3 页编号",
+      "requirement": "填写标识 Ref-P3",
+      "kind": "literal",
+      "terms": [
+        "Ref-P3"
+      ]
+    },
+    {
+      "id": "P4-DETAIL",
+      "page": 4,
+      "title": "第 4 页作业说明",
+      "requirement": "说明至少一个具体操作及其目标",
+      "kind": "semantic"
+    },
+    {
+      "id": "P4-LABEL",
+      "page": 4,
+      "title": "第 4 页编号",
+      "requirement": "填写标识 Ref-P4",
+      "kind": "literal",
+      "terms": [
+        "Ref-P4"
+      ]
+    },
+    {
+      "id": "P5-DETAIL",
+      "page": 5,
+      "title": "第 5 页作业说明",
+      "requirement": "说明至少一个具体操作及其目标",
+      "kind": "semantic"
+    },
+    {
+      "id": "P5-LABEL",
+      "page": 5,
+      "title": "第 5 页编号",
+      "requirement": "填写标识 Ref-P5",
+      "kind": "literal",
+      "terms": [
+        "Ref-P5"
+      ]
+    },
+    {
+      "id": "P6-DETAIL",
+      "page": 6,
+      "title": "第 6 页作业说明",
+      "requirement": "说明至少一个具体操作及其目标",
+      "kind": "semantic"
+    },
+    {
+      "id": "P6-LABEL",
+      "page": 6,
+      "title": "第 6 页编号",
+      "requirement": "填写标识 Ref-P6",
+      "kind": "literal",
+      "terms": [
+        "Ref-P6"
+      ]
+    },
+    {
+      "id": "P7-DETAIL",
+      "page": 7,
+      "title": "第 7 页作业说明",
+      "requirement": "说明至少一个具体操作及其目标",
+      "kind": "semantic"
+    },
+    {
+      "id": "P7-LABEL",
+      "page": 7,
+      "title": "第 7 页编号",
+      "requirement": "填写标识 Ref-P7",
+      "kind": "literal",
+      "terms": [
+        "Ref-P7"
+      ]
+    }
+  ],
+  "rubrics": {
+    "A": {
+      "A1": {
+        "name": "模拟 A1",
+        "conditions": [
+          "描述第 1 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "A2": {
+        "name": "模拟 A2",
+        "conditions": [
+          "描述第 2 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "A3": {
+        "name": "模拟 A3",
+        "conditions": [
+          "描述第 3 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "B1": {
+        "name": "模拟 B1",
+        "conditions": [
+          "描述第 4 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "B2": {
+        "name": "模拟 B2",
+        "conditions": [
+          "描述第 5 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "B3": {
+        "name": "模拟 B3",
+        "conditions": [
+          "描述第 6 页的作业目标",
+          "提交类别 A 的说明"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      }
+    },
+    "B": {
+      "A1": {
+        "name": "模拟 A1",
+        "conditions": [
+          "描述第 1 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "A2": {
+        "name": "模拟 A2",
+        "conditions": [
+          "描述第 2 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "A3": {
+        "name": "模拟 A3",
+        "conditions": [
+          "描述第 3 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "B1": {
+        "name": "模拟 B1",
+        "conditions": [
+          "描述第 4 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "B2": {
+        "name": "模拟 B2",
+        "conditions": [
+          "描述第 5 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "B3": {
+        "name": "模拟 B3",
+        "conditions": [
+          "描述第 6 页的作业目标",
+          "提交类别 B 的说明"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      }
+    },
+    "C": {
+      "A1": {
+        "name": "模拟 A1",
+        "conditions": [
+          "描述第 1 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "A2": {
+        "name": "模拟 A2",
+        "conditions": [
+          "描述第 2 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "A3": {
+        "name": "模拟 A3",
+        "conditions": [
+          "描述第 3 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "B1": {
+        "name": "模拟 B1",
+        "conditions": [
+          "描述第 4 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "B2": {
+        "name": "模拟 B2",
+        "conditions": [
+          "描述第 5 页的作业目标"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      },
+      "B3": {
+        "name": "模拟 B3",
+        "conditions": [
+          "描述第 6 页的作业目标",
+          "提交类别 C 的说明"
+        ],
+        "levels": [
+          {
+            "id": "basic",
+            "min": 0,
+            "max": 59,
+            "description": "条件证据有限"
+          },
+          {
+            "id": "developing",
+            "min": 60,
+            "max": 79,
+            "description": "有直接说明，细节有限"
+          },
+          {
+            "id": "supported",
+            "min": 80,
+            "max": 100,
+            "description": "具备充分的直接证据"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "models": {
+    "qwen": {"url_env": "RW_V2_QWEN_URL", "model_env": "RW_V2_QWEN_MODEL", "key_env": "RW_V2_QWEN_KEY", "vision": "qwen"},
+    "judge_b": {"url_env": "RW_V2_JUDGE_B_URL", "model_env": "RW_V2_JUDGE_B_MODEL", "key_env": "RW_V2_JUDGE_B_KEY", "vision": "qwen"}
+  },
+  "checklist": "qwen",
+  "judges": ["qwen", "judge_b"],
+  "summary": "qwen"
+}

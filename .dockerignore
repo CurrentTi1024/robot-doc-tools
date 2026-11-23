@@ -1,0 +1,8 @@
+.git
+.local
+.venv
+.env
+**/__pycache__
+deepseek.txt
+deeepseek.txt
+configs/company*.json
